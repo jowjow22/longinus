@@ -4,33 +4,33 @@ import type { AppProps } from 'next/app'
 import { theme } from '@styles/themes/customTheme'
 import Header from 'components/Header'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
-import { createTheme } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 
 function MyApp({ Component, pageProps }: AppProps) {
-	const nextUIThemeDark = createTheme(theme.dark)
-	const nextUIThemeLight = createTheme(theme.light)
-
-	const [currentTheme, setCurrentTheme] = useState(nextUIThemeDark)
+	const [currentTheme, setCurrentTheme] = useState(true)
 
 	useEffect(() => {
-		localStorage.getItem('theme') === 'dark'
-			? setCurrentTheme(nextUIThemeDark)
-			: setCurrentTheme(nextUIThemeLight)
-	}, [currentTheme])
+		setCurrentTheme(localStorage.getItem('theme') === 'dark')
+	}, [])
 
 	return (
 		<ThemeProvider
-			defaultTheme={nextUIThemeDark}
+			defaultTheme={theme.dark}
 			attribute="class"
 			value={{
-				light: nextUIThemeLight,
-				dark: nextUIThemeDark
+				light: theme.light.className,
+				dark: theme.dark.className
 			}}
 		>
 			<NextUIProvider>
-				<StyledThemeProvider theme={currentTheme}>
-					<Header />
+				<StyledThemeProvider
+					theme={currentTheme ? theme.dark : theme.light}
+				>
+					<Header
+						styledTheme={() => {
+							setCurrentTheme(!currentTheme)
+						}}
+					/>
 					<Component {...pageProps} />
 				</StyledThemeProvider>
 			</NextUIProvider>

@@ -1,14 +1,16 @@
+import { createTheme } from '@nextui-org/react'
 import { darken, lighten } from 'polished'
 
 export const theme = {
-	dark: {
+	dark: createTheme({
 		type: 'dark',
 		theme: {
 			colors: {
 				primary: '#00e0c6',
 				primarySolidHover: lighten(0.1, '#00e0c6'),
 				primaryShadow: darken(0.1, '#00e0c6'),
-				aaaa: 'rgb(0, 224, 198)'
+				borderColor: '#333',
+				link: '#00e0c6'
 			},
 			space: {},
 			fonts: {
@@ -22,15 +24,16 @@ export const theme = {
 				xl: '1920px'
 			}
 		}
-	},
-	light: {
+	}),
+	light: createTheme({
 		type: 'light',
 		theme: {
 			colors: {
 				primary: '#00e0c6',
 				primarySolidHover: lighten(0.1, '#00e0c6'),
 				primaryShadow: darken(0.1, '#00e0c6'),
-				aaaa: 'rgb(100, 0, 198)'
+				borderColor: '#ddd',
+				link: '#00e0c6'
 			},
 			space: {},
 			fonts: {
@@ -44,5 +47,5 @@ export const theme = {
 				xl: '1920px'
 			}
 		}
-	}
+	})
 }

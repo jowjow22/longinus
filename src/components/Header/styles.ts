@@ -5,7 +5,7 @@ export const Container = styled.header`
 	align-items: center;
 	justify-content: space-around;
 	padding: 0.5rem 1rem;
-	border-bottom: 1px solid ${(props) => props.theme.colors.aaaa.value};
+	border-bottom: 1px solid ${(props) => props.theme.colors.borderColor.value};
 `
 export const ActionsContainer = styled.div`
 	display: flex;
