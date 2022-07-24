@@ -1,6 +1,6 @@
 import { useTheme as useNextTheme } from 'next-themes'
 import { Link, Switch, useTheme } from '@nextui-org/react'
-import { RiSunFill, RiMoonClearFill } from 'react-icons/ri'
+import { RiSunFill, RiMoonClearFill, RiChatQuoteFill } from 'react-icons/ri'
 import { Container, ActionsContainer } from './styles'
 
 interface HeaderProps {
@@ -9,23 +9,26 @@ interface HeaderProps {
 
 const Header = ({ styledTheme }: HeaderProps) => {
 	const { setTheme } = useNextTheme()
-	const { isDark, type } = useTheme()
+	const { isDark, type, theme } = useTheme()
 	return (
 		<Container>
-			<h1>Header</h1>
+			<h1>logo</h1>
 			<ActionsContainer>
 				<Link href="/">Home</Link>
-				<Link>About</Link>
+				<Link href="#about" underline>
+					About
+				</Link>
 				<Link>Projects</Link>
 				<Switch
-					checked={isDark}
+					checked={!isDark}
 					size="xl"
 					onChange={() => {
 						styledTheme()
 						setTheme(type === 'light' ? 'dark' : 'light')
 					}}
-					iconOff={<RiSunFill />}
-					iconOn={<RiMoonClearFill />}
+					className="theme-switch"
+					iconOn={<RiSunFill color={theme?.colors.primary.value} />}
+					iconOff={<RiMoonClearFill />}
 					shadow
 				/>
 			</ActionsContainer>
